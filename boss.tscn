@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://n16l56yytbh7"]
+
+[ext_resource type="Script" uid="uid://8rtw2u6tuawb" path="res://boss_script.gd" id="1_skx2t"]
+[ext_resource type="PackedScene" uid="uid://138pwkiwen5o" path="res://bullet.tscn" id="2_lnbgr"]
+[ext_resource type="Texture2D" uid="uid://c27ecqdydyyp7" path="res://icon.svg" id="3_o1i15"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_skx2t"]
+size = Vector2(129, 125)
+
+[node name="Boss" type="CharacterBody2D"]
+script = ExtResource("1_skx2t")
+bullet_scene = ExtResource("2_lnbgr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -1.5)
+shape = SubResource("RectangleShape2D_skx2t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+texture = ExtResource("3_o1i15")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
